@@ -5,6 +5,10 @@ export type PeopleShape = {
     name: string,
 };
 
+export type AppProps = {
+    salutation: string,
+};
+
 export type AppState = {
     people: Array<PeopleShape>,
 };

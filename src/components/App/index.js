@@ -5,11 +5,14 @@ import logo from './../../logo.svg';
 import './styles.css';
 import Header from './../Header';
 import Info from './../Info';
-import type {AppState} from './types';
+import type {
+    AppProps,
+    AppState,
+} from './types';
 
-class App extends Component<{}, AppState> {
+class App extends Component<AppProps, AppState> {
     state = {
-        people: []
+        people: [],
     };
 
     fetchData = async (): Promise<fetch> => {
@@ -25,10 +28,15 @@ class App extends Component<{}, AppState> {
     componentDidMount(): void {
         this.fetchData();
     }
+
+    componentWillUnmount(): void {
+        console.log('Adddddiiiioooooossssss')
+    }
   render(): React.Element<'div'> {
     return (
       <div className="App">
         <Header
+            message={this.props.salutation}
             logo={logo}
             />
         <div className="App-intro">
