@@ -1,15 +1,18 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import Header from './components/Header';
-import Info from './components/Info';
+// @flow
+import * as React from 'react';
+import { Component } from 'react';
+import logo from './../../logo.svg';
+import './styles.css';
+import Header from './../Header';
+import Info from './../Info';
+import type {AppState} from './types';
 
-class App extends Component {
+class App extends Component<{}, AppState> {
     state = {
         people: []
     };
 
-    fetchData = async () => {
+    fetchData = async (): Promise<fetch> => {
         try {
             const peopleRaw = await fetch('https://swapi.co/api/people');
             const peopleDownloaded = await peopleRaw.json();
@@ -19,14 +22,13 @@ class App extends Component {
             console.error(e);
         }
     }
-    componentDidMount() {
+    componentDidMount(): void {
         this.fetchData();
     }
-  render() {
+  render(): React.Element<'div'> {
     return (
       <div className="App">
         <Header
-            mensaje="Hello World!"
             logo={logo}
             />
         <div className="App-intro">
