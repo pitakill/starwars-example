@@ -11,6 +11,14 @@ import type {
 } from './types';
 
 class App extends Component<AppProps, AppState> {
+    increment = () => {
+        this.props.increment(12);
+    }
+
+    decrement = () => {
+        this.props.decrement(22);
+    }
+
   render(): React.Element<'div'> {
     return (
       <div className="App">
@@ -19,7 +27,8 @@ class App extends Component<AppProps, AppState> {
             logo={logo}
             />
         <div className="App-intro">
-        <button onClick={this.props.increment}>Obtener información</button>
+        <button onClick={this.increment}>Sumar 12</button>
+        <button onClick={this.decrement}>Restar 22</button>
         {
             this.props.people.map(({height, name, gender}) => {
                 const key = name + height;

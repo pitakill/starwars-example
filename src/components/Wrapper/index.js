@@ -1,27 +1,10 @@
 // @flow
 import * as React from 'react';
 import App from '../App';
-import {createStore, bindActionCreators} from 'redux';
+import {bindActionCreators} from 'redux';
 import {Provider, connect} from 'react-redux';
-
-const INCREMENT = 'INCREMENT';
-const DECREMENT = 'DECREMENT';
-
-const counter = (state = 0, action) => {
-    switch (action.type) {
-        case INCREMENT:
-            return state + 1;
-        case DECREMENT:
-            return state - 1;
-        default:
-            return state;
-    }
-};
-
-const store = createStore(
-    counter,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-);
+import store from '../../store';
+import * as actions from '../../actions';
 
 class WrapperWithRedux extends React.Component<{}, void> {
     //fetchData = async (): Promise<fetch> => {
@@ -46,12 +29,9 @@ class WrapperWithRedux extends React.Component<{}, void> {
     }
 }
 
-const increment = () => ({type: INCREMENT});
-const decrement = () => ({type: DECREMENT});
-
 const mapStateToProps = (state) => ({counter: state.counter});
 const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators({increment, decrement}, dispatch)
+    actions: bindActionCreators(actions, dispatch)
 });
 
 const WrapperConnected = connect(
