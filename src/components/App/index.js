@@ -11,27 +11,6 @@ import type {
 } from './types';
 
 class App extends Component<AppProps, AppState> {
-    state = {
-        people: [],
-    };
-
-    fetchData = async (): Promise<fetch> => {
-        try {
-            const peopleRaw = await fetch('https://swapi.co/api/people');
-            const peopleDownloaded = await peopleRaw.json();
-            this.setState({people: peopleDownloaded.results});
-            //console.log(peopleDownloaded.results)
-        } catch (e) {
-            console.error(e);
-        }
-    }
-    componentDidMount(): void {
-        this.fetchData();
-    }
-
-    componentWillUnmount(): void {
-        console.log('Adddddiiiioooooossssss')
-    }
   render(): React.Element<'div'> {
     return (
       <div className="App">
@@ -40,8 +19,9 @@ class App extends Component<AppProps, AppState> {
             logo={logo}
             />
         <div className="App-intro">
+        <button onClick={this.props.increment}>Obtener información</button>
         {
-            this.state.people.map(({height, name, gender}) => {
+            this.props.people.map(({height, name, gender}) => {
                 const key = name + height;
 
                 return (
