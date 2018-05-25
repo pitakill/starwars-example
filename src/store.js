@@ -1,7 +1,14 @@
-import {createStore} from 'redux';
-import counter from './reducer';
+import {createStore, applyMiddleware} from 'redux';
+import createSagaMiddleware from 'redux-saga';
+import reducer from './reducer';
+import mySaga from './saga';
+
+const sagaMiddleware = createSagaMiddleware();
 
 export default createStore(
-    counter,
+    reducer,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+    applyMiddleware(sagaMiddleware),
 );
+
+sagaMiddleware.run(mySaga);

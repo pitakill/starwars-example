@@ -1,14 +1,14 @@
 // @flow
-export type PeopleShape = {
+export type ApiCallShape = {
     height: string,
     gender: string,
     name: string,
 };
 
 export type AppProps = {
-    salutation: string,
-};
-
-export type AppState = {
-    people: Array<PeopleShape>,
+    salutation?: string,
+    increment: Function,
+    decrement: Function,
+    fetch: Function,
+    apiCall: Array<ApiCallShape>,
 };
